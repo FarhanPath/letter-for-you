@@ -5,54 +5,49 @@
 <title>Letter for You 💌</title>
 
 <style>
-* {
-  box-sizing: border-box;
-}
-
 body {
   margin: 0;
   height: 100vh;
-  background: #fff3f3;
+  background: #fff1f1;
   font-family: "Courier New", monospace;
   display: flex;
   justify-content: center;
   align-items: center;
   overflow: hidden;
+  text-align: center;
 }
 
-/* floating hearts */
+/* Floating hearts */
 .heart {
   position: absolute;
-  color: #e38b8b;
+  color: #e8a0a0;
   font-size: 12px;
   opacity: 0.6;
-  animation: float 8s linear infinite;
+  animation: float linear infinite;
 }
 
 @keyframes float {
-  from {
-    transform: translateY(100vh);
-  }
-  to {
-    transform: translateY(-10vh);
-  }
+  from { transform: translateY(100vh); }
+  to { transform: translateY(-10vh); }
 }
 
-/* container */
-.container {
-  text-align: center;
-  z-index: 2;
+/* Screens */
+.screen {
+  display: none;
+}
+.active {
+  display: block;
 }
 
-/* envelope */
+/* Envelope */
 .envelope {
-  width: 120px;
-  height: 80px;
+  width: 130px;
+  height: 90px;
   border: 2px solid #e38b8b;
-  position: relative;
+  background: #ffe6e6;
   margin: auto;
+  position: relative;
   cursor: pointer;
-  background: #ffecec;
 }
 
 .envelope:before,
@@ -74,16 +69,15 @@ body {
   transform-origin: top right;
 }
 
-.heart-center {
+.envelope span {
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
   color: #e25555;
-  font-size: 14px;
 }
 
-/* text */
+/* Text */
 .title {
   margin-top: 12px;
   font-size: 14px;
@@ -94,15 +88,9 @@ body {
   opacity: 0.7;
 }
 
-/* letter screen */
-#letter {
-  display: none;
-  text-align: center;
-  padding: 20px;
-}
-
+/* Buttons */
 button {
-  padding: 10px 20px;
+  padding: 10px 22px;
   margin: 10px;
   border: none;
   border-radius: 6px;
@@ -118,60 +106,65 @@ button {
 .no {
   background: #eb5757;
   color: white;
+  position: absolute;
 }
 </style>
 </head>
 
 <body>
 
-<!-- hearts -->
+<!-- Floating hearts generator -->
 <script>
-for (let i = 0; i < 50; i++) {
+for (let i = 0; i < 60; i++) {
   let h = document.createElement("div");
   h.className = "heart";
   h.innerHTML = "♡";
   h.style.left = Math.random() * 100 + "vw";
-  h.style.animationDuration = 5 + Math.random() * 5 + "s";
+  h.style.animationDuration = 6 + Math.random() * 6 + "s";
   document.body.appendChild(h);
 }
 </script>
 
-<!-- screen 1 -->
-<div class="container" id="home">
+<!-- SCREEN 1 -->
+<div id="home" class="screen active">
   <div class="envelope" onclick="openLetter()">
-    <div class="heart-center">♥</div>
+    <span>♥</span>
   </div>
   <div class="title">♡ Letter for You ♡</div>
   <div class="sub">Tap to open 💌</div>
 </div>
 
-<!-- screen 2 -->
-<div id="letter">
+<!-- SCREEN 2 -->
+<div id="coffee" class="screen">
+  <p>Coffee thak u c ☕</p>
+
+  <button class="yes" onclick="goFinal()">YES 😊</button>
+  <button class="no" onmouseover="moveNo(this)">NO 😅</button>
+</div>
+
+<!-- SCREEN 3 -->
+<div id="final" class="screen">
   <p>
-    thabak chtkhibadagi busy ym oikhre<br>
-    message fw yngkhidre<br><br>
-    Coffee thak u c ☕
+    thabak chtlabo? college chtlena haijandrasu yare khnge 😅<br>
+    message thrk o wari ama leege!
   </p>
 
-  <button class="yes" onclick="yesClick()">YES 😊</button>
+  <button class="yes">YES 😊</button>
   <button class="no" onmouseover="moveNo(this)">NO 😅</button>
-
-  <p id="reply"></p>
 </div>
 
 <script>
 function openLetter() {
-  document.getElementById("home").style.display = "none";
-  document.getElementById("letter").style.display = "block";
+  home.classList.remove("active");
+  coffee.classList.add("active");
 }
 
-function yesClick() {
-  document.getElementById("reply").innerHTML =
-    "Thank you 💛<br>Pressure oina nattaduna,<br>Just happy you said yes 😊🌸";
+function goFinal() {
+  coffee.classList.remove("active");
+  final.classList.add("active");
 }
 
 function moveNo(btn) {
-  btn.style.position = "absolute";
   btn.style.left = Math.random() * 80 + "vw";
   btn.style.top = Math.random() * 80 + "vh";
 }
