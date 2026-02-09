@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Letter for You 💌</title>
+
+<style>
+body {
+  margin: 0;
+  height: 100vh;
+  background: #fff7f7;
+  font-family: Arial, sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+
+.screen {
+  display: none;
+  text-align: center;
+}
+.active {
+  display: block;
+}
+
+.envelope {
+  width: 120px;
+  height: 80px;
+  border: 2px solid #e07a7a;
+  position: relative;
+  cursor: pointer;
+  margin: auto;
+}
+.envelope::before {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border-top: 2px solid #e07a7a;
+  transform: rotate(45deg);
+  transform-origin: top left;
+}
+
+button {
+  padding: 12px 28px;
+  font-size: 18px;
+  border: none;
+  border-radius: 8px;
+  margin: 10px;
+  cursor: pointer;
+}
+#yes { background: #2ecc71; }
+#no {
+  background: #e74c3c;
+  position: absolute;
+}
+</style>
+</head>
+
+<body>
+
+<!-- SCREEN 1 -->
+<div id="s1" class="screen active">
+  <div class="envelope" onclick="openQ()"></div>
+  <p>♡ Letter for You ♡</p>
+</div>
+
+<!-- SCREEN 2 -->
+<div id="s2" class="screen">
+  <h2>
+    Bro 💛<br>
+    Busy ym oirabo life c bu<br>
+    Coffee thak u c ☕😊
+  </h2>
+  <button id="yes" onclick="yes()">YES 😊</button>
+  <button id="no" onmouseover="move()">NO 😅</button>
+</div>
+
+<!-- SCREEN 3 -->
+<div id="s3" class="screen">
+  <h2>
+    Thank you 💛<br>
+    Pressure oina nattaduna,<br>
+    Just happy you said yes 😊🌸
+  </h2>
+</div>
+
+<script>
+function openQ() {
+  s1.classList.remove("active");
+  s2.classList.add("active");
+}
+function yes() {
+  s2.classList.remove("active");
+  s3.classList.add("active");
+}
+function move() {
+  no.style.left = Math.random()*80 + "vw";
+  no.style.top = Math.random()*80 + "vh";
+}
+</script>
+
+</body>
+</html>
