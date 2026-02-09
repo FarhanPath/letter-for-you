@@ -8,7 +8,7 @@
 body {
   margin: 0;
   height: 100vh;
-  background: #fff1f1;
+  background: #fff3f3;
   font-family: "Courier New", monospace;
   display: flex;
   justify-content: center;
@@ -20,9 +20,9 @@ body {
 /* Floating hearts */
 .heart {
   position: absolute;
-  color: #e8a0a0;
-  font-size: 12px;
-  opacity: 0.6;
+  color: #e89a9a;
+  font-size: 14px;
+  opacity: 0.8;
   animation: float linear infinite;
 }
 
@@ -39,48 +39,43 @@ body {
   display: block;
 }
 
-/* Envelope */
+/* Envelope container */
 .envelope {
-  width: 130px;
-  height: 90px;
-  border: 2px solid #e38b8b;
-  background: #ffe6e6;
-  margin: auto;
+  width: 160px;
+  height: 110px;
+  background: #ffe1e1;
+  border: 3px solid #e07a7a;
   position: relative;
+  margin: auto;
   cursor: pointer;
 }
 
-.envelope:before,
-.envelope:after {
+/* Envelope flap */
+.envelope:before {
   content: "";
   position: absolute;
+  top: 0;
+  left: 0;
   width: 100%;
   height: 100%;
-  border-top: 2px solid #e38b8b;
+  clip-path: polygon(0 0, 50% 55%, 100% 0);
+  border-bottom: 3px solid #e07a7a;
 }
 
-.envelope:before {
-  transform: rotate(45deg);
-  transform-origin: top left;
-}
-
-.envelope:after {
-  transform: rotate(-45deg);
-  transform-origin: top right;
-}
-
-.envelope span {
+/* Heart seal */
+.seal {
   position: absolute;
-  top: 50%;
+  bottom: 35px;
   left: 50%;
-  transform: translate(-50%, -50%);
-  color: #e25555;
+  transform: translateX(-50%);
+  font-size: 18px;
+  color: #d85b5b;
 }
 
 /* Text */
 .title {
-  margin-top: 12px;
-  font-size: 14px;
+  margin-top: 14px;
+  font-size: 15px;
 }
 
 .sub {
@@ -90,7 +85,7 @@ body {
 
 /* Buttons */
 button {
-  padding: 10px 22px;
+  padding: 10px 24px;
   margin: 10px;
   border: none;
   border-radius: 6px;
@@ -113,14 +108,15 @@ button {
 
 <body>
 
-<!-- Floating hearts generator -->
+<!-- Hearts -->
 <script>
-for (let i = 0; i < 60; i++) {
+for (let i = 0; i < 90; i++) {
   let h = document.createElement("div");
   h.className = "heart";
   h.innerHTML = "♡";
   h.style.left = Math.random() * 100 + "vw";
   h.style.animationDuration = 6 + Math.random() * 6 + "s";
+  h.style.fontSize = 10 + Math.random() * 8 + "px";
   document.body.appendChild(h);
 }
 </script>
@@ -128,7 +124,7 @@ for (let i = 0; i < 60; i++) {
 <!-- SCREEN 1 -->
 <div id="home" class="screen active">
   <div class="envelope" onclick="openLetter()">
-    <span>♥</span>
+    <div class="seal">♥</div>
   </div>
   <div class="title">♡ Letter for You ♡</div>
   <div class="sub">Tap to open 💌</div>
@@ -137,7 +133,6 @@ for (let i = 0; i < 60; i++) {
 <!-- SCREEN 2 -->
 <div id="coffee" class="screen">
   <p>Coffee thak u c ☕</p>
-
   <button class="yes" onclick="goFinal()">YES 😊</button>
   <button class="no" onmouseover="moveNo(this)">NO 😅</button>
 </div>
@@ -148,7 +143,6 @@ for (let i = 0; i < 60; i++) {
     thabak chtlabo? college chtlena haijandrasu yare khnge 😅<br>
     message thrk o wari ama leege!
   </p>
-
   <button class="yes">YES 😊</button>
   <button class="no" onmouseover="moveNo(this)">NO 😅</button>
 </div>
