@@ -5,164 +5,142 @@
 <title>Letter for You 💌</title>
 
 <style>
-body {
-  margin: 0;
-  height: 100vh;
-  background: #fff3f3;
-  font-family: "Courier New", monospace;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  overflow: hidden;
-  text-align: center;
-}
+  * {
+    box-sizing: border-box;
+  }
 
-/* Floating hearts */
-.heart {
-  position: absolute;
-  color: #e89a9a;
-  font-size: 14px;
-  opacity: 0.8;
-  animation: float linear infinite;
-}
+  body {
+    margin: 0;
+    height: 100vh;
+    background: #fff1f1;
+    font-family: "Courier New", monospace;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+  }
 
-@keyframes float {
-  from { transform: translateY(100vh); }
-  to { transform: translateY(-10vh); }
-}
+  /* floating hearts */
+  .heart {
+    position: absolute;
+    font-size: 12px;
+    color: #f2a1a1;
+    animation: float 8s linear infinite;
+    opacity: 0.6;
+  }
 
-/* Screens */
-.screen {
-  display: none;
-}
-.active {
-  display: block;
-}
+  @keyframes float {
+    from {
+      transform: translateY(100vh);
+    }
+    to {
+      transform: translateY(-10vh);
+    }
+  }
 
-/* Envelope container */
-.envelope {
-  width: 160px;
-  height: 110px;
-  background: #ffe1e1;
-  border: 3px solid #e07a7a;
-  position: relative;
-  margin: auto;
-  cursor: pointer;
-}
+  /* container */
+  .container {
+    text-align: center;
+    padding: 20px;
+  }
 
-/* Envelope flap */
-.envelope:before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  clip-path: polygon(0 0, 50% 55%, 100% 0);
-  border-bottom: 3px solid #e07a7a;
-}
+  /* envelope */
+  .envelope {
+    width: 120px;
+    height: 80px;
+    border: 2px solid #e07a7a;
+    background: #ffecec;
+    margin: 0 auto 12px;
+    position: relative;
+    cursor: pointer;
+  }
 
-/* Heart seal */
-.seal {
-  position: absolute;
-  bottom: 35px;
-  left: 50%;
-  transform: translateX(-50%);
-  font-size: 18px;
-  color: #d85b5b;
-}
+  .envelope::before,
+  .envelope::after {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border-top: 2px solid #e07a7a;
+    top: 0;
+  }
 
-/* Text */
-.title {
-  margin-top: 14px;
-  font-size: 15px;
-}
+  .envelope::before {
+    transform: rotate(45deg);
+    transform-origin: top left;
+  }
 
-.sub {
-  font-size: 12px;
-  opacity: 0.7;
-}
+  .envelope::after {
+    transform: rotate(-45deg);
+    transform-origin: top right;
+  }
 
-/* Buttons */
-button {
-  padding: 10px 24px;
-  margin: 10px;
-  border: none;
-  border-radius: 6px;
-  font-size: 16px;
-  cursor: pointer;
-}
+  .heart-center {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: #e25555;
+    font-size: 14px;
+  }
 
-.yes {
-  background: #6fcf97;
-  color: white;
-}
+  .title {
+    font-size: 14px;
+    margin-top: 6px;
+  }
 
-.no {
-  background: #eb5757;
-  color: white;
-  position: absolute;
-}
+  .subtitle {
+    font-size: 12px;
+    opacity: 0.7;
+  }
+
+  /* message screen */
+  .message {
+    display: none;
+    font-size: 13px;
+    line-height: 1.6;
+    margin-top: 10px;
+  }
 </style>
 </head>
 
 <body>
 
-<!-- Hearts -->
+<!-- hearts -->
 <script>
-for (let i = 0; i < 90; i++) {
-  let h = document.createElement("div");
-  h.className = "heart";
-  h.innerHTML = "♡";
-  h.style.left = Math.random() * 100 + "vw";
-  h.style.animationDuration = 6 + Math.random() * 6 + "s";
-  h.style.fontSize = 10 + Math.random() * 8 + "px";
-  document.body.appendChild(h);
-}
+  for (let i = 0; i < 40; i++) {
+    let h = document.createElement("div");
+    h.className = "heart";
+    h.innerHTML = "♡";
+    h.style.left = Math.random() * 100 + "vw";
+    h.style.animationDelay = Math.random() * 8 + "s";
+    h.style.fontSize = (10 + Math.random() * 8) + "px";
+    document.body.appendChild(h);
+  }
 </script>
 
-<!-- SCREEN 1 -->
-<div id="home" class="screen active">
+<div class="container">
   <div class="envelope" onclick="openLetter()">
-    <div class="seal">♥</div>
+    <div class="heart-center">♥</div>
   </div>
+
   <div class="title">♡ Letter for You ♡</div>
-  <div class="sub">Tap to open 💌</div>
-</div>
+  <div class="subtitle">Tap to open 💌</div>
 
-<!-- SCREEN 2 -->
-<div id="coffee" class="screen">
-  <p>Coffee thak u c ☕</p>
-  <button class="yes" onclick="goFinal()">YES 😊</button>
-  <button class="no" onmouseover="moveNo(this)">NO 😅</button>
-</div>
-
-<!-- SCREEN 3 -->
-<div id="final" class="screen">
-  <p>
+  <div class="message" id="msg">
     thabak chtlabo? college chtlena haijandrasu yare khnge 😅<br>
-    message thrk o wari ama leege!
-  </p>
-  <button class="yes">YES 😊</button>
-  <button class="no" onmouseover="moveNo(this)">NO 😅</button>
+    nggi matam adu kheidok o,<br>
+    message thrk o wari ama leege.
+  </div>
 </div>
 
 <script>
-function openLetter() {
-  home.classList.remove("active");
-  coffee.classList.add("active");
-}
-
-function goFinal() {
-  coffee.classList.remove("active");
-  final.classList.add("active");
-}
-
-function moveNo(btn) {
-  btn.style.left = Math.random() * 80 + "vw";
-  btn.style.top = Math.random() * 80 + "vh";
-}
+  function openLetter() {
+    document.querySelector(".envelope").style.display = "none";
+    document.querySelector(".subtitle").style.display = "none";
+    document.getElementById("msg").style.display = "block";
+  }
 </script>
 
 </body>
-</html>
+  </html>
